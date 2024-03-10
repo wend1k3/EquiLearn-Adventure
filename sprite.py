@@ -3,6 +3,7 @@ import pygame
 from map.Level import Level
 from people.Player import Player
 from Screen.StartScreen import StartScreen
+from Screen.PlayerSelectionScreen import PlayerSelectionScreen as PSS
 from item.Box import Box
 from people.Enemy import Enemy
 from item.ItemManager import ItemManager
@@ -15,8 +16,10 @@ screen_width, screen_height = 1280, 736
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 start_screen = StartScreen(screen)
+PS = PSS(screen)
 canvas = pygame.Surface((screen_width,screen_height))
 start_screen.run()
+player_choices = PS.run()
 level = Level('test.png') 
 player1 = Player(50,2,int(48*1.5),int(34*1.5),level,10)
 player2 = Player(1000,40,int(48*1.5),int(34*1.5),level,10)
@@ -69,9 +72,11 @@ while running:
                 player1.setDown(True)
             if event.key == pygame.K_e:
                 
-                #if (player1.getHitbox().colliderect(box.getHitbox())):
+              
                 im.checkCollision(player1)
                 print(player1.knowledge)
+            if event.key == pygame.K_p:
+                im.checkCollision(player2)
                     
            
         if event.type == pygame.KEYUP:

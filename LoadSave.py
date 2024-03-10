@@ -6,10 +6,19 @@ class LoadSave:
     BOX_ATLAS = "Box3.png"
     BOOK_ATLAS = "book.png"
     TILE_0_ATLAS = "0.png"
+    IDLE_ATLAS = "idle.png"
     @staticmethod
-    def get_sprite_atlas(file_name):
+    def get_disable_atlas(file_name):
         try:
-            img = pygame.image.load(os.path.join('assets/characters/wheelchair', file_name))
+            img = pygame.image.load(os.path.join('assets/characters/player/disable', file_name))
+            return img
+        except pygame.error as e:
+            print(f"Error loading image: {file_name}\n{e}")
+            return None
+    @staticmethod
+    def get_enable_atlas(file_name):
+        try:
+            img = pygame.image.load(os.path.join('assets/characters/player/enable', file_name))
             return img
         except pygame.error as e:
             print(f"Error loading image: {file_name}\n{e}")
