@@ -6,7 +6,7 @@ class Player(Entity):
         super().__init__(x,y,width,height,level)
         self.able = type == "enable"
         self.walkSpeed = 2 if not self.able else 6
-        print(self.walkSpeed)
+        
         self.frames = []
         self.current_frame_index = 0
         self._loadAnimations()
@@ -17,7 +17,7 @@ class Player(Entity):
         self.overload = False
         self.maxBrain = 40
         self.aniSpeed=5
-        self.time = 120
+        self.time = 10
         self.digit_imgs =  self.digit_images = self.load_digit_images("assets/item/digits/")
         self.win = False
        

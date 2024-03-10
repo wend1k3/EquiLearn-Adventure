@@ -7,7 +7,7 @@ from Screen.PlayerSelectionScreen import PlayerSelectionScreen as PSS
 
 from people.EnemyManager import EnemyManager
 from item.ItemManager import ItemManager
-
+from LoadSave import LoadSave
 pygame.init()
 
 
@@ -46,9 +46,11 @@ last_path_update_time = pygame.time.get_ticks()
 last_update_time = pygame.time.get_ticks()
 path_update_interval = 1000
 game_over = False
+bg_img = LoadSave.get_bg_atlas(LoadSave.BG_ATLAS)
+bg_img = pygame.transform.scale(bg_img, (screen_width, screen_height))
 def draw_end_screen(screen, winner):
     font = pygame.font.Font('fonts/monogram.ttf', 40)
-    text_color = (255, 255, 255)  # White
+    text_color = (250,35,35)  
     screen_width = 1280
     screen_height = 736
 
@@ -67,7 +69,7 @@ def draw_end_screen(screen, winner):
     
     # Display instructions for exiting or replaying
     instructions_font = pygame.font.Font('fonts/monogram.ttf', 40)
-    instructions_text = instructions_font.render("Press 'R' to Replay or 'Q' to Quit", True, text_color)
+    instructions_text = instructions_font.render("Press 'Q' to Quit", True, text_color)
     instructions_rect = instructions_text.get_rect(center=(screen_width // 2, 3 * screen_height // 4))
     screen.blit(instructions_text, instructions_rect)
     
@@ -75,7 +77,8 @@ def draw_end_screen(screen, winner):
 
     
 while running:
-    screen.fill((0, 0, 0))
+    #screen.fill((0, 0, 0))
+    
     current_time = pygame.time.get_ticks()
     if current_time - last_update_time > 1000:  
         player1.setTime(-1)
@@ -155,13 +158,13 @@ while running:
     
 
     canvas.fill((0, 0, 0))
-    
+    canvas.blit(bg_img, (0, 0))
 
 
     
    
     player1.updateAnimationTick()
-    print(player1.knowledge)
+    
     
     player2.updateAnimationTick()
     em.updateAnimation()
@@ -193,21 +196,16 @@ while running:
 
     clock.tick(60)
     if game_over:
-        draw_end_screen(screen, "Player 1")
+        draw_end_screen(screen, (player1.win and player2.win))
         waiting_for_input = True
         while waiting_for_input:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     waiting_for_input = False
-                    pygame.quit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_r:
-                        # Reset the game
-                        waiting_for_input = False
-                    elif event.key == pygame.K_q:
-                        # Quit the game
-                        waiting_for_input = False
-                        pygame.quit()
+                    exit(0)
+         
+                
+       
 
     
 
