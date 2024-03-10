@@ -2,6 +2,7 @@ import pygame
 
 from Level import Level
 from Player import Player
+from StartScreen import StartScreen
 
 
 pygame.init()
@@ -10,6 +11,9 @@ pygame.init()
 screen_width, screen_height = 1280, 720
 screen = pygame.display.set_mode((screen_width, screen_height))
 
+start_screen = StartScreen(screen)
+
+start_screen.run()
 level = Level('1.png') 
 player = Player(level)
 
