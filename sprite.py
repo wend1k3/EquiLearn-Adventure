@@ -1,9 +1,11 @@
 import pygame
 
-from Level import Level
-from Player import Player
-from StartScreen import StartScreen
-from Box import Box
+from map.Level import Level
+from people.Player import Player
+from Screen.StartScreen import StartScreen
+from item.Box import Box
+from people.Enemy import Enemy
+
 
 pygame.init()
 
@@ -16,8 +18,8 @@ start_screen = StartScreen(screen)
 canvas = pygame.Surface((screen_width,screen_height))
 start_screen.run()
 level = Level('test.png') 
-player1 = Player(50,2,int(48*1.5),int(34*1.5),level)
-player2 = Player(1000,40,int(48*1.5),int(34*1.5),level)
+player1 = Player(50,2,int(48*1.5),int(34*1.5),level,10)
+player2 = Player(1000,40,int(48*1.5),int(34*1.5),level,10)
 level_size = (level.width * level.tile_size, level.height * level.tile_size)
 space = pygame.Rect(0, 0, *level_size)
 box = Box(level.getObject()[0][0],level.getObject()[0][1])
@@ -28,12 +30,17 @@ p2_cam = pygame.Rect(screen_width//2,0,screen_width//2,screen_height)
 sub1 = canvas .subsurface(p1_cam)
 sub2 = canvas .subsurface(p2_cam)
 
+enemy = Enemy(50,100,int(48*1.5),int(48*1.5),level)
 
 running = True
 clock = pygame.time.Clock()
+last_path_update_time = pygame.time.get_ticks()
+path_update_interval = 1000
+
 while running:
+    current_time = pygame.time.get_ticks()
     screen.fill((0, 0, 0))
-    #print(box.getHitbox().x,box.getHitbox().y)
+   
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -82,17 +89,18 @@ while running:
                 player1.setDown(False)
                 
             
-
+   
     
     player1.update()
     player2.update()
+ 
     p1_cam.center = player1.getHitbox().center
     p2_cam.center = player2.getHitbox().center
  
     p1_cam.clamp_ip(space) 
     p2_cam.clamp_ip(space)
     
-    #print(player1.getHitbox().x,player1.getHitbox().y)
+
     canvas.fill((0, 0, 0))
     
 
@@ -100,18 +108,21 @@ while running:
     
    
     player1.updateAnimationTick()
+    enemy.updateAnimationTick()
+    player2.updateAnimationTick()
     level.draw(sub1,p1_cam)
     box.draw(sub1,p1_cam)
     player1.draw(sub1,p1_cam)
     player2.draw(sub1,p1_cam)
+    enemy.draw(sub1,p1_cam)
     
 
-    player2.updateAnimationTick()
+    
     level.draw(sub2,p2_cam)
     box.draw(sub2,p2_cam)
     player2.draw(sub2,p2_cam)
     player1.draw(sub2,p2_cam)
-    
+    enemy.draw(sub2,p2_cam)
   
 
 

@@ -1,4 +1,4 @@
-from Item import Item
+from item.Item import Item
 import pygame
 from LoadSave import LoadSave
 class Box(Item):
