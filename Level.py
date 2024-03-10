@@ -50,12 +50,13 @@ class Level:
         
     def load_entities(self, green_value, x, y):
         # Example condition for green values (customize as needed)
-        if green_value == 100:
-            self.lvl_data[y][x] = Pix.TRAP
+        pass
+        
     
 
     def load_objects(self, blue_value, x, y):
-        pass
+        if blue_value == 250:
+            self.lvl_data[y][x] = Pix.TRAP
     
     def checkSolid(self, x, y):
         maxWidth = len(self.lvl_data[0])*self.tile_size
@@ -94,12 +95,19 @@ class Level:
     def draw(self, screen, camera):
         for y, row in enumerate(self.lvl_data):
             for x, tile in enumerate(row):
-                if tile != Pix.BLANK:  
-                    screen_x = int(x * self.tile_size - camera.x)
-                    screen_y = int(y * self.tile_size - camera.y)
+                if tile == Pix.BLANK:
+                    continue
+                if tile == Pix.GRID:  
+                    
              
                     #pygame.draw.rect(screen, (255, 255, 255), (screen_x, screen_y, self.tile_size, self.tile_size))
                  
                     sprite = LoadSave.get_tile_atlas(LoadSave.TILE_0_ATLAS)
-                    screen.blit(sprite,(screen_x,screen_y))
+                    
+                else:
+                    sprite = LoadSave.get_item_atlas(LoadSave.BOX_ATLAS)
+                screen_x = int(x * self.tile_size - camera.x)
+                screen_y = int(y * self.tile_size - camera.y)
+                screen.blit(sprite,(screen_x,screen_y))
+                
     
