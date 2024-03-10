@@ -45,7 +45,35 @@ clock = pygame.time.Clock()
 last_path_update_time = pygame.time.get_ticks()
 last_update_time = pygame.time.get_ticks()
 path_update_interval = 1000
+game_over = False
+def draw_end_screen(screen, winner):
+    font = pygame.font.Font('fonts/monogram.ttf', 40)
+    text_color = (255, 255, 255)  # White
+    screen_width = 1280
+    screen_height = 736
 
+    game_over_text = font.render("End", True, text_color)
+    text_rect = game_over_text.get_rect(center=(screen_width // 2, screen_height // 4))
+    screen.blit(game_over_text, text_rect)
+    
+    if winner:
+        winner_text = font.render("Now you understand the importance of cooperation", True, text_color)
+    else:
+        winner_text = font.render("Nobody wins. Why?", True, text_color)
+
+    winner_rect = winner_text.get_rect(center=(screen_width // 2, screen_height // 4 + 100))
+    screen.blit(winner_text, winner_rect)
+    
+    
+    # Display instructions for exiting or replaying
+    instructions_font = pygame.font.Font('fonts/monogram.ttf', 40)
+    instructions_text = instructions_font.render("Press 'R' to Replay or 'Q' to Quit", True, text_color)
+    instructions_rect = instructions_text.get_rect(center=(screen_width // 2, 3 * screen_height // 4))
+    screen.blit(instructions_text, instructions_rect)
+    
+    pygame.display.flip()  # Update the screen with what we've drawn
+
+    
 while running:
     screen.fill((0, 0, 0))
     current_time = pygame.time.get_ticks()
@@ -53,6 +81,10 @@ while running:
         player1.setTime(-1)
         player2.setTime(-1)
         last_update_time = current_time
+    if (player1.win or player2.win):
+        game_over = True
+    elif (player1.time==0 or player2.time==0):
+        game_over = True
     
 
     for event in pygame.event.get():
@@ -82,9 +114,13 @@ while running:
                 
               
                 im.checkCollision(player1)
-                print(player1.knowledge)
+              
+            elif event.key == pygame.K_f:
+                player1.useItem()
             if event.key == pygame.K_p:
                 im.checkCollision(player2)
+            elif event.key == pygame.K_l:
+                player2.useItem()
                     
            
         if event.type == pygame.KEYUP:
@@ -125,7 +161,8 @@ while running:
     
    
     player1.updateAnimationTick()
-  
+    print(player1.knowledge)
+    
     player2.updateAnimationTick()
     em.updateAnimation()
     level.draw(sub1,p1_cam)
@@ -155,6 +192,23 @@ while running:
     
 
     clock.tick(60)
+    if game_over:
+        draw_end_screen(screen, "Player 1")
+        waiting_for_input = True
+        while waiting_for_input:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    waiting_for_input = False
+                    pygame.quit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        # Reset the game
+                        waiting_for_input = False
+                    elif event.key == pygame.K_q:
+                        # Quit the game
+                        waiting_for_input = False
+                        pygame.quit()
+
     
 
 pygame.quit()

@@ -17,9 +17,9 @@ class Player(Entity):
         self.overload = False
         self.maxBrain = 40
         self.aniSpeed=5
-        self.time = 45
+        self.time = 20
         self.digit_imgs =  self.digit_images = self.load_digit_images("assets/item/digits/")
-        
+        self.win = False
        
     
     @staticmethod
@@ -55,10 +55,20 @@ class Player(Entity):
       
     def useItem(self):
         if (not len(self.bag)==0):
-            self.bag.pop().setAlive()
+            box = self.bag.pop()
+            if (box.type=="exam"):
+                self.knowledge -= box.value
+                if (self.knowledge<0):
+                    self.overload = True
+            else:
+                self.time += box.value
+            box.setAlive()
     
     def setTime(self,num):
         self.time += num
+    def checkOverLoad(self):
+        if self.overload:
+            self.walkSpeed *= 0.5
     
     def draw(self,surface,camera):
         super().draw(surface,camera)
@@ -74,7 +84,13 @@ class Player(Entity):
         for i, digit in enumerate(time_str):
             surface.blit(self.digit_images[digit], (start_x + i * digit_width, start_y))
 
+    def checkAlive(self):
+        if (self.x//32==37 and self.y//32==44 and self.time>=0):
+            self.win = True
+        else:
+            self.win = False
+            
       
-
+    
    
        

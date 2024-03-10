@@ -8,6 +8,7 @@ class LoadSave:
     TILE_0_ATLAS = "0.png"
     IDLE_ATLAS = "idle.png"
     WALK_ATLAS = "walk.png"
+    INST_ATLAS = "inst.png"
     @staticmethod
     def get_disable_atlas(file_name):
         try:
@@ -50,4 +51,12 @@ class LoadSave:
             print(f"Error loading image: {file_name}\n{e}")
             return None
     
+    @staticmethod
+    def get_inst_atlas(file_name):
+        try:
+            img = pygame.image.load(os.path.join('assets/bg', file_name))
+            return img
+        except pygame.error as e:
+            print(f"Error loading image: {file_name}\n{e}")
+            return None
     

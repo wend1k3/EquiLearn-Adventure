@@ -113,11 +113,20 @@ class Level:
     def draw(self, screen, camera):
         for y, row in enumerate(self.lvl_data):
             for x, tile in enumerate(row):
-                if tile == Pix.GRID:
+                if tile == Pix.GRID :
                     sprite = LoadSave.get_tile_atlas(LoadSave.TILE_0_ATLAS)
                     screen_x = int(x * self.tile_size - camera.x)
                     screen_y = int(y * self.tile_size - camera.y)
                     screen.blit(sprite,(screen_x,screen_y))
+                    
+                elif x==4 and y==1:
+                    sprite = LoadSave.get_inst_atlas(LoadSave.INST_ATLAS)
+                    sprite = pygame.transform.scale(sprite,(sprite.get_width()*2,sprite.get_height()*2))
+                    screen_x = int(x * self.tile_size - camera.x)
+                    screen_y = int(y * self.tile_size - camera.y)
+                    screen.blit(sprite,(screen_x,screen_y))
+                
+
     def get_unoccupied_walkable_coordinates(self):
         """Returns a list of walkable and unoccupied coordinates."""
         walkable_coordinates = self.find_blank_coordinates()
