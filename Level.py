@@ -41,7 +41,7 @@ class Level:
         if (red_value==233):
             self.lvl_data[y][x] = Pix.GRID
         '''
-        if red_value == 11:
+        if red_value != 11:
             self.lvl_data[y][x] = Pix.BLANK
         else:
             self.lvl_data[y][x] = Pix.GRID

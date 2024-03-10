@@ -8,14 +8,14 @@ from StartScreen import StartScreen
 pygame.init()
 
 
-screen_width, screen_height = 1280, 720
+screen_width, screen_height = 1280, 736
 screen = pygame.display.set_mode((screen_width, screen_height))
 
 start_screen = StartScreen(screen)
 
 start_screen.run()
 level = Level('1.png') 
-player = Player(2,2,int(48*1.5),int(34*1.5),level)
+player = Player(40,2,int(48*1.5),int(34*1.5),level)
 
 
 
