@@ -4,7 +4,7 @@ import pygame
 class Player(Entity):
     def __init__(self,x,y,width,height,level):
         super().__init__(x,y,width,height,level)
-        self.walkSpeed = 1
+        self.walkSpeed = 4
         
         self.frames = []
         self.current_frame_index = 0

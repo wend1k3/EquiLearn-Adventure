@@ -8,6 +8,7 @@ from StartScreen import StartScreen
 pygame.init()
 
 
+
 screen_width, screen_height = 1280, 736
 screen = pygame.display.set_mode((screen_width, screen_height))
 
@@ -19,10 +20,7 @@ player1 = Player(50,2,int(48*1.5),int(34*1.5),level)
 player2 = Player(1000,40,int(48*1.5),int(34*1.5),level)
 level_size = (level.width * level.tile_size, level.height * level.tile_size)
 space = pygame.Rect(0, 0, *level_size)
-'''
-frame = screen.get_rect()
-camera = frame.copy()
-'''
+
 
 p1_cam = pygame.Rect(0,0,screen_width//2,screen_height)
 p2_cam = pygame.Rect(screen_width//2,0,screen_width//2,screen_height)
@@ -44,7 +42,7 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 player1.setLeft(True)
-                print("A pressed")
+              
             elif event.key == pygame.K_RIGHT:
                 player1.setRight(True)
             elif event.key == pygame.K_UP:
@@ -86,13 +84,14 @@ while running:
     player2.update()
     p1_cam.center = player1.getHitbox().center
     p2_cam.center = player2.getHitbox().center
+ 
     p1_cam.clamp_ip(space) 
     p2_cam.clamp_ip(space)
     
     canvas.fill((0, 0, 0))
-  
+    
 
-   
+
     
    
     player1.updateAnimationTick()
@@ -114,5 +113,6 @@ while running:
     
 
     clock.tick(60)
+    
 
 pygame.quit()
