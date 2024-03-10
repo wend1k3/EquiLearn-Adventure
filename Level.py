@@ -101,20 +101,13 @@ class Level:
     def draw(self, screen, camera):
         for y, row in enumerate(self.lvl_data):
             for x, tile in enumerate(row):
-                if tile == Pix.BLANK:
-                    continue
-                if tile == Pix.GRID:  
-                    
-             
-                    #pygame.draw.rect(screen, (255, 255, 255), (screen_x, screen_y, self.tile_size, self.tile_size))
-                 
+                if tile == Pix.GRID:
                     sprite = LoadSave.get_tile_atlas(LoadSave.TILE_0_ATLAS)
-                    
-                else:
-                    #sprite = LoadSave.get_item_atlas(LoadSave.BOX_ATLAS)
-                    pass
-                screen_x = int(x * self.tile_size - camera.x)
-                screen_y = int(y * self.tile_size - camera.y)
-                screen.blit(sprite,(screen_x,screen_y))
+                    screen_x = int(x * self.tile_size - camera.x)
+                    screen_y = int(y * self.tile_size - camera.y)
+                    screen.blit(sprite,(screen_x,screen_y))
+
+                #
+                
     
     

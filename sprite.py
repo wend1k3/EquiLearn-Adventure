@@ -41,23 +41,23 @@ while running:
        
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                player1.setLeft(True)
+                player2.setLeft(True)
               
             elif event.key == pygame.K_RIGHT:
-                player1.setRight(True)
+                player2.setRight(True)
             elif event.key == pygame.K_UP:
-                player1.setUp(True)
+                player2.setUp(True)
             elif event.key == pygame.K_DOWN:
-                player1.setDown(True)
+                player2.setDown(True)
             if event.key == pygame.K_a:
 
-                player2.setLeft(True)
+                player1.setLeft(True)
             elif event.key == pygame.K_d:
-                player2.setRight(True)
+                player1.setRight(True)
             elif event.key == pygame.K_w:
-                player2.setUp(True)
+                player1.setUp(True)
             elif event.key == pygame.K_s:
-                player2.setDown(True)
+                player1.setDown(True)
             if event.key == pygame.K_e:
                 if (player1.getHitbox().colliderect(box.getHitbox())):
            
@@ -65,21 +65,21 @@ while running:
            
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
-                player1.setLeft(False)
-            elif event.key == pygame.K_RIGHT:
-                player1.setRight(False)
-            elif event.key == pygame.K_UP:
-                player1.setUp(False)
-            elif event.key == pygame.K_DOWN:
-                player1.setDown(False)
-            if event.key == pygame.K_a:
                 player2.setLeft(False)
-            elif event.key == pygame.K_d:
+            elif event.key == pygame.K_RIGHT:
                 player2.setRight(False)
-            elif event.key == pygame.K_w:
+            elif event.key == pygame.K_UP:
                 player2.setUp(False)
-            elif event.key == pygame.K_s:
+            elif event.key == pygame.K_DOWN:
                 player2.setDown(False)
+            if event.key == pygame.K_a:
+                player1.setLeft(False)
+            elif event.key == pygame.K_d:
+                player1.setRight(False)
+            elif event.key == pygame.K_w:
+                player1.setUp(False)
+            elif event.key == pygame.K_s:
+                player1.setDown(False)
                 
             
 
