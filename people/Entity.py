@@ -49,14 +49,7 @@ class Entity:
         if self.canMove:
             self.move()       
         self.updateHitbox() 
-    def addItem(self,item):
-        if (len(self.bag)<self.maxSize):
-            self.bag.append(item)
-            print("add item")
-      
-    def useItem(self):
-        if (not len(self.bag)==0):
-            self.bag.pop()
+    
     def updateDirection(self):
         # Reset direction to NONE if no movement keys are pressed
         if not (self.up or self.down or self.left or self.right):

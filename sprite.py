@@ -5,7 +5,7 @@ from people.Player import Player
 from Screen.StartScreen import StartScreen
 from item.Box import Box
 from people.Enemy import Enemy
-
+from item.ItemManager import ItemManager
 
 pygame.init()
 
@@ -31,7 +31,10 @@ sub1 = canvas .subsurface(p1_cam)
 sub2 = canvas .subsurface(p2_cam)
 
 enemy = Enemy(50,100,int(48*1.5),int(48*1.5),level)
+im = ItemManager()
+level.generate_random_items(4)
 
+im.loadItem(level.getObject())
 running = True
 clock = pygame.time.Clock()
 last_path_update_time = pygame.time.get_ticks()
@@ -66,9 +69,11 @@ while running:
             elif event.key == pygame.K_s:
                 player1.setDown(True)
             if event.key == pygame.K_e:
-                if (player1.getHitbox().colliderect(box.getHitbox())):
-           
-                    player1.addItem(box)
+                
+                #if (player1.getHitbox().colliderect(box.getHitbox())):
+                im.checkCollision(player1)
+                    
+                    
            
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
@@ -111,10 +116,11 @@ while running:
     enemy.updateAnimationTick()
     player2.updateAnimationTick()
     level.draw(sub1,p1_cam)
-    box.draw(sub1,p1_cam)
+    im.drawItem(sub1,p1_cam)
     player1.draw(sub1,p1_cam)
     player2.draw(sub1,p1_cam)
     enemy.draw(sub1,p1_cam)
+    im.drawItem(sub2,p2_cam)
     
 
     

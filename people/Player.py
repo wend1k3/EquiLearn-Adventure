@@ -28,6 +28,14 @@ class Player(Entity):
             new_f = pygame.transform.scale(frame,(int(48*1.5),int(34*1.5)))
        
             self.frames.append(new_f)
+    def addItem(self,item):
+        if (len(self.bag)<self.maxSize):
+            self.bag.append(item)
+            print("add item")
+      
+    def useItem(self):
+        if (not len(self.bag)==0):
+            self.bag.pop().setAlive()
       
       
 

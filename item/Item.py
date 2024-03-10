@@ -12,3 +12,5 @@ class Item:
         return self.hitbox
     def setAlive(self):
         self.alive = False
+    def isAlive(self):
+        return self.alive

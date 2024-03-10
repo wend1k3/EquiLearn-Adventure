@@ -2,13 +2,13 @@ import pygame
 
 from map.Pix import Pix
 from LoadSave import LoadSave
-
+import random
 
 class Level:
     def __init__(self, img_path):
         self.img = pygame.image.load(img_path)
         self.width, self.height = self.img.get_size()
-        # Initialize the level data with zeros (for simplicity)
+ 
         self.lvl_data = [[0 for _ in range(self.width)] for _ in range(self.height)]
         self.player_spawn = None
         
@@ -17,12 +17,22 @@ class Level:
         self.load_level()
     
     def find_grid_coordinates(self):
-        grid_coordinates = []  # List to store coordinates containing Pix.GRID
+        grid_coordinates = []  
         for y, row in enumerate(self.lvl_data):
             for x, tile in enumerate(row):
                 if tile == Pix.GRID:
-                    print(f"Grid found at: ({x}, {y})")  # Print each grid coordinate
-                    grid_coordinates.append((x, y))  # Add the coordinate to the list
+                    print(f"Grid found at: ({x}, {y})")  
+                    grid_coordinates.append((x, y)) 
+        
+        return grid_coordinates
+    
+    def find_blank_coordinates(self):
+        grid_coordinates = []  
+        for y, row in enumerate(self.lvl_data):
+            for x, tile in enumerate(row):
+                if tile == Pix.BLANK:
+                    print(f"Grid found at: ({x}, {y})")  
+                    grid_coordinates.append((x, y)) 
         
         return grid_coordinates
 
@@ -108,7 +118,27 @@ class Level:
                     screen_x = int(x * self.tile_size - camera.x)
                     screen_y = int(y * self.tile_size - camera.y)
                     screen.blit(sprite,(screen_x,screen_y))
+    def get_unoccupied_walkable_coordinates(self):
+        """Returns a list of walkable and unoccupied coordinates."""
+        walkable_coordinates = self.find_blank_coordinates()
+        unoccupied_coordinates = [coord for coord in walkable_coordinates if coord not in self.obj]
+        return unoccupied_coordinates
 
+    def generate_random_items(self, num_items):
+        """Places 'num_items' randomly in unoccupied walkable areas."""
+        unoccupied_coords = self.get_unoccupied_walkable_coordinates()
+        for _ in range(num_items):
+            if unoccupied_coords:  
+                coord = random.choice(unoccupied_coords)
+                self.place_item_at(coord)
+                unoccupied_coords.remove(coord)  
+    def place_item_at(self, coord):
+        """Place an item at the specified coordinate."""
+        x, y = coord
+     
+        pixel_x, pixel_y = x * self.tile_size, y * self.tile_size
+     
+        self.obj.append((pixel_x, pixel_y))
        
    
     
