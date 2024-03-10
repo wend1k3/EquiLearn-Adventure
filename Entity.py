@@ -3,7 +3,7 @@ from EntityState import EntityState
 from Level import Level
 import pygame
 class Entity:
-    def __init__(self,x,y,width,height,level):
+    def __init__(self,x,y,width,height,level,maxSize):
         self.x = x
         self.y = y
         self.width = width
@@ -25,6 +25,8 @@ class Entity:
         self.level = level
         self.scale_factor = 1.5
         self.hitbox = None
+        self.maxSize = maxSize
+        self.bag = []
     def initHitbox(self,width,height):
         self.hitbox = pygame.Rect(self.x,self.y,int(width*self.scale_factor),int(height*self.scale_factor))
     def move(self):
@@ -47,9 +49,14 @@ class Entity:
         if self.canMove:
             self.move()       
         self.updateHitbox() 
- 
+    def addItem(self,item):
+        if (len(self.bag)<self.maxSize):
+            self.bag.append(item)
+            print("add item")
       
-
+    def useItem(self):
+        if (not len(self.bag)==0):
+            self.bag.pop()
     def updateDirection(self):
         # Reset direction to NONE if no movement keys are pressed
         if not (self.up or self.down or self.left or self.right):

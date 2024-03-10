@@ -3,8 +3,8 @@ from LoadSave import LoadSave
 import pygame
 class Player(Entity):
     def __init__(self,x,y,width,height,level):
-        super().__init__(x,y,width,height,level)
-        self.walkSpeed = 4
+        super().__init__(x,y,width,height,level,10)
+        self.walkSpeed = 10
         
         self.frames = []
         self.current_frame_index = 0
@@ -18,7 +18,7 @@ class Player(Entity):
         sprite = LoadSave.get_sprite_atlas(LoadSave.NPC_WHEELCHAIR_ATLAS)
         frame_width = sprite.get_width() // 4
         frame_height = sprite.get_height()
-        print(frame_height)
+        
       
         for i in range(4):
             # Define the rectangle area to extract (x, y, width, height)

@@ -3,7 +3,7 @@ import pygame
 from Level import Level
 from Player import Player
 from StartScreen import StartScreen
-
+from Box import Box
 
 pygame.init()
 
@@ -20,7 +20,7 @@ player1 = Player(50,2,int(48*1.5),int(34*1.5),level)
 player2 = Player(1000,40,int(48*1.5),int(34*1.5),level)
 level_size = (level.width * level.tile_size, level.height * level.tile_size)
 space = pygame.Rect(0, 0, *level_size)
-
+box = Box(level.getObject()[0][0],level.getObject()[0][1])
 
 p1_cam = pygame.Rect(0,0,screen_width//2,screen_height)
 p2_cam = pygame.Rect(screen_width//2,0,screen_width//2,screen_height)
@@ -33,7 +33,7 @@ running = True
 clock = pygame.time.Clock()
 while running:
     screen.fill((0, 0, 0))
-    
+    #print(box.getHitbox().x,box.getHitbox().y)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -58,7 +58,11 @@ while running:
                 player2.setUp(True)
             elif event.key == pygame.K_s:
                 player2.setDown(True)
-            
+            if event.key == pygame.K_e:
+                if (player1.getHitbox().colliderect(box.getHitbox())):
+           
+                    player1.addItem(box)
+           
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
                 player1.setLeft(False)
@@ -88,6 +92,7 @@ while running:
     p1_cam.clamp_ip(space) 
     p2_cam.clamp_ip(space)
     
+    #print(player1.getHitbox().x,player1.getHitbox().y)
     canvas.fill((0, 0, 0))
     
 
@@ -96,14 +101,19 @@ while running:
    
     player1.updateAnimationTick()
     level.draw(sub1,p1_cam)
+    box.draw(sub1,p1_cam)
     player1.draw(sub1,p1_cam)
     player2.draw(sub1,p1_cam)
+    
 
     player2.updateAnimationTick()
     level.draw(sub2,p2_cam)
+    box.draw(sub2,p2_cam)
     player2.draw(sub2,p2_cam)
     player1.draw(sub2,p2_cam)
     
+  
+
 
 
     screen.blit(sub1, (0, 0))

@@ -9,8 +9,10 @@ class Level:
         # Initialize the level data with zeros (for simplicity)
         self.lvl_data = [[0 for _ in range(self.width)] for _ in range(self.height)]
         self.player_spawn = None
-        self.load_level()
+        
         self.tile_size = 32
+        self.obj =[]
+        self.load_level()
     
     def find_grid_coordinates(self):
         grid_coordinates = []  # List to store coordinates containing Pix.GRID
@@ -57,6 +59,7 @@ class Level:
     def load_objects(self, blue_value, x, y):
         if blue_value == 250:
             self.lvl_data[y][x] = Pix.TRAP
+            self.recordObject(x*self.tile_size,y*self.tile_size)
     
     def checkSolid(self, x, y):
         maxWidth = len(self.lvl_data[0])*self.tile_size
@@ -74,7 +77,10 @@ class Level:
     def canMove(self,x,y,w,h):
         return (not self.checkSolid(x,y)) and (not self.checkSolid(x+w,y+h)) and (not self.checkSolid(x+w,y)) and (not (self.checkSolid(x,y+h)))
         
-
+    def recordObject(self,x,y):
+        self.obj.append((x,y))
+    def getObject(self):
+        return self.obj
 
     
 
@@ -105,9 +111,10 @@ class Level:
                     sprite = LoadSave.get_tile_atlas(LoadSave.TILE_0_ATLAS)
                     
                 else:
-                    sprite = LoadSave.get_item_atlas(LoadSave.BOX_ATLAS)
+                    #sprite = LoadSave.get_item_atlas(LoadSave.BOX_ATLAS)
+                    pass
                 screen_x = int(x * self.tile_size - camera.x)
                 screen_y = int(y * self.tile_size - camera.y)
                 screen.blit(sprite,(screen_x,screen_y))
-                
+    
     

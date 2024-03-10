@@ -4,7 +4,7 @@ class Item:
         self.alive = True
         self.posx = x
         self.posy = y
-        self.initHitbox(x,y)
+        self.initHitbox(self.posx,self.posy)
     def initHitbox(self,x,y):
         self.hitbox.x = x
         self.hitbox.y = y
