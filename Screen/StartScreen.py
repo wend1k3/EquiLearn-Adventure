@@ -11,8 +11,8 @@ class StartScreen:
         self.title_font = pygame.font.Font('fonts/monogram.ttf', 70)
         self.background_color = (30, 30, 30)
         self.text_color = (255, 255, 255)
-        self.title_text = "cmd-f"
-        self.menu_items = ["Start", "Options", "Exit"]
+        self.title_text = "EquiLearn Adventure"
+        self.menu_items = ["Start",  "Exit"]
         self.selected_item = 0  # Index of the currently selected menu item
         original_background_image = pygame.image.load('background/blackboard.jpg').convert()
         self.background_image = pygame.transform.scale(original_background_image, (self.screen.get_width(), self.screen.get_height()))
