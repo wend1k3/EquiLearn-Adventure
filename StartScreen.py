@@ -7,8 +7,8 @@ class StartScreen:
         self.screen_width = screen.get_width()
         self.screen_height = screen.get_height()
         self.running = True
-        self.font = pygame.font.SysFont('chalkboard', 30)
-        self.title_font = pygame.font.SysFont('chalk', 90, bold=True)
+        self.font = pygame.font.SysFont('chalkboard', 25)
+        self.title_font = pygame.font.SysFont('chalk', 70, bold=True)
         self.background_color = (30, 30, 30)
         self.text_color = (255, 255, 255)
         self.title_text = "cmd-f"
@@ -47,7 +47,7 @@ class StartScreen:
                 text = self.font.render(item, True, (128, 128, 128))  # Highlight selected item
             else:
                 text = self.font.render(item, True, self.text_color)
-            text_rect = text.get_rect(center=(self.screen_width / 2, 2 * self.screen_height / 5 + self.screen_height / 10 * index))
+            text_rect = text.get_rect(center=(self.screen_width / 2, 2 * self.screen_height / 5 + self.screen_height / 13 * index))
             self.screen.blit(text, text_rect)
 
     def draw(self):
@@ -57,7 +57,7 @@ class StartScreen:
         
     def draw_title(self):
         title_surface = self.title_font.render(self.title_text, True, self.text_color)
-        title_rect = title_surface.get_rect(center=(self.screen_width / 2, self.screen_height / 4))
+        title_rect = title_surface.get_rect(center=(self.screen_width / 2, self.screen_height / 5))
         self.screen.blit(title_surface, title_rect)
 
     def run(self):

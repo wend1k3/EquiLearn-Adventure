@@ -14,8 +14,8 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 start_screen = StartScreen(screen)
 
 start_screen.run()
-level = Level('1.png') 
-player = Player(40,2,int(48*1.5),int(34*1.5),level)
+level = Level('2.png') 
+player = Player(screen_width / 2 - 40,2,int(48*1.5),int(34*1.5),level)
 
 
 
