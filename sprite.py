@@ -15,7 +15,7 @@ start_screen = StartScreen(screen)
 
 start_screen.run()
 level = Level('1.png') 
-player = Player(level)
+player = Player(2,2,int(48*1.5),int(34*1.5),level)
 
 
 
@@ -23,8 +23,7 @@ player = Player(level)
 level.printData()
 grid_coordinates = level.find_grid_coordinates()
 
-# Example: print the list of coordinates containing Pix.GRID
-#print("All coordinates containing Pix.GRID:", grid_coordinates)
+
 running = True
 clock = pygame.time.Clock()
 while running:

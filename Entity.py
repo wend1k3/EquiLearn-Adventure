@@ -24,7 +24,9 @@ class Entity:
         self.canMove = True
         self.level = level
         self.scale_factor = 1.5
-        self.hitbox = pygame.Rect(self.x,self.y,self.width,self.height)
+        self.hitbox = None
+    def initHitbox(self,width,height):
+        self.hitbox = pygame.Rect(self.x,self.y,int(width*self.scale_factor),int(height*self.scale_factor))
     def move(self):
         if ((self.left or self.right)and ((not self.right) or (not self.left))):
             if (self.left and (not self.right)):
@@ -143,6 +145,7 @@ class Entity:
         self.down = flag
     def setCanMove(self,flag):
         self.canMove = flag
+    
     
 
 
