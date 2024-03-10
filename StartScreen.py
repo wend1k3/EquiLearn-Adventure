@@ -7,8 +7,8 @@ class StartScreen:
         self.screen_width = screen.get_width()
         self.screen_height = screen.get_height()
         self.running = True
-        self.font = pygame.font.SysFont('chalkboard', 25)
-        self.title_font = pygame.font.SysFont('chalk', 70, bold=True)
+        self.font = pygame.font.Font('fonts/monogram.ttf', 40)
+        self.title_font = pygame.font.Font('fonts/monogram.ttf', 70)
         self.background_color = (30, 30, 30)
         self.text_color = (255, 255, 255)
         self.title_text = "cmd-f"
@@ -57,7 +57,7 @@ class StartScreen:
         
     def draw_title(self):
         title_surface = self.title_font.render(self.title_text, True, self.text_color)
-        title_rect = title_surface.get_rect(center=(self.screen_width / 2, self.screen_height / 5))
+        title_rect = title_surface.get_rect(center=(self.screen_width / 2, self.screen_height / 4))
         self.screen.blit(title_surface, title_rect)
 
     def run(self):
