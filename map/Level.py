@@ -77,7 +77,7 @@ class Level:
         maxWidth = len(self.lvl_data[0])*self.tile_size
         if (x< 0 or x>=maxWidth):
             return True
-        if (y<0 or y>=720):
+        if (y<0 or y>=720*2):
             return True
         new_x = int(x//self.tile_size)
         new_y = int(y//self.tile_size)

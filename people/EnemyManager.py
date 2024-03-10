@@ -9,7 +9,10 @@ class EnemyManager:
         for loc in self.loc:
             new_enemy = Enemy(loc[0], loc[1], int(48*1.5), int(48*1.5), self.level)
             self.ene.append(new_enemy)  
-         
+    def updateAnimation(self):
+        for ene in self.ene:
+            ene.updateAnimationTick()
+
             
     def drawEnemy(self,surface,camera):
         for ene in self.ene:

@@ -122,6 +122,7 @@ while running:
     player1.updateAnimationTick()
     #enemy.updateAnimationTick()
     player2.updateAnimationTick()
+    em.updateAnimation()
     level.draw(sub1,p1_cam)
     im.drawItem(sub1,p1_cam)
     em.drawEnemy(sub1,p1_cam)
