@@ -20,8 +20,8 @@ player = Player(2,2,int(48*1.5),int(34*1.5),level)
 
 
 
-level.printData()
-grid_coordinates = level.find_grid_coordinates()
+
+
 
 
 running = True

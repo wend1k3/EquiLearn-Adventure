@@ -38,11 +38,15 @@ class Entity:
                 self._moveUp()
             if (self.down and (not self.up)):
                 self._moveDown()
+    def updateHitbox(self):
+        self.hitbox.x = self.x
+        self.hitbox.y = self.y
     def update(self):
-        self.updateDirection()  # Determine the new direction based on input
-        self.checkCanMove()     # Check if movement is possible in the new direction
+        self.updateDirection() 
+        self.checkCanMove()     
         if self.canMove:
-            self.move()         # Move if allowed
+            self.move()       
+        self.updateHitbox() 
       
 
     def updateDirection(self):

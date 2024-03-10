@@ -22,7 +22,7 @@ class Player(Entity):
 
         
         temp_hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
-        pygame.draw.rect(surface, (255, 0, 0), temp_hitbox, 1)
+        pygame.draw.rect(surface, (255, 0, 0), self.hitbox, 1)
     def _loadAnimations(self):
         sprite = LoadSave.get_sprite_atlas(LoadSave.NPC_WHEELCHAIR_ATLAS)
         frame_width = sprite.get_width() // 4
