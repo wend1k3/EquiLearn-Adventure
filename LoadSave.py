@@ -4,6 +4,7 @@ class LoadSave:
     NPC_WHEELCHAIR_ATLAS = "Walk.png"
     Enemy_ATLAS = "walk.png"
     BOX_ATLAS = "Box3.png"
+    BOOK_ATLAS = "book.png"
     TILE_0_ATLAS = "0.png"
     @staticmethod
     def get_sprite_atlas(file_name):

@@ -21,7 +21,7 @@ class Level:
         for y, row in enumerate(self.lvl_data):
             for x, tile in enumerate(row):
                 if tile == Pix.GRID:
-                    print(f"Grid found at: ({x}, {y})")  
+                    #print(f"Grid found at: ({x}, {y})")  
                     grid_coordinates.append((x, y)) 
         
         return grid_coordinates
@@ -31,7 +31,7 @@ class Level:
         for y, row in enumerate(self.lvl_data):
             for x, tile in enumerate(row):
                 if tile == Pix.BLANK:
-                    print(f"Grid found at: ({x}, {y})")  
+                    #print(f"Grid found at: ({x}, {y})")  
                     grid_coordinates.append((x, y)) 
         
         return grid_coordinates

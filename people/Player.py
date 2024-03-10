@@ -12,6 +12,9 @@ class Player(Entity):
         self.initHitbox(40,34)
         self.maxSize = maxSize
         self.bag = []
+        self.knowledge = 0
+        self.overload = False
+        self.maxBrain = 40
        
     
 
@@ -28,6 +31,9 @@ class Player(Entity):
             new_f = pygame.transform.scale(frame,(int(48*1.5),int(34*1.5)))
        
             self.frames.append(new_f)
+    def addBook(self,book):
+        self.knowledge += book.knowledge
+        self.overload = True if self.knowledge>self.maxBrain else False
     def addItem(self,item):
         if (len(self.bag)<self.maxSize):
             self.bag.append(item)

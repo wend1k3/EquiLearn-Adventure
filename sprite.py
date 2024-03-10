@@ -22,7 +22,7 @@ player1 = Player(50,2,int(48*1.5),int(34*1.5),level,10)
 player2 = Player(1000,40,int(48*1.5),int(34*1.5),level,10)
 level_size = (level.width * level.tile_size, level.height * level.tile_size)
 space = pygame.Rect(0, 0, *level_size)
-box = Box(level.getObject()[0][0],level.getObject()[0][1])
+
 
 p1_cam = pygame.Rect(0,0,screen_width//2,screen_height)
 p2_cam = pygame.Rect(screen_width//2,0,screen_width//2,screen_height)
@@ -32,9 +32,8 @@ sub2 = canvas .subsurface(p2_cam)
 
 enemy = Enemy(50,100,int(48*1.5),int(48*1.5),level)
 im = ItemManager()
-level.generate_random_items(4)
-
-im.loadItem(level.getObject())
+level.generate_random_items(8)
+im.loadItems(level.getObject())
 running = True
 clock = pygame.time.Clock()
 last_path_update_time = pygame.time.get_ticks()
@@ -72,7 +71,7 @@ while running:
                 
                 #if (player1.getHitbox().colliderect(box.getHitbox())):
                 im.checkCollision(player1)
-                    
+                print(player1.knowledge)
                     
            
         if event.type == pygame.KEYUP:
@@ -125,7 +124,7 @@ while running:
 
     
     level.draw(sub2,p2_cam)
-    box.draw(sub2,p2_cam)
+
     player2.draw(sub2,p2_cam)
     player1.draw(sub2,p2_cam)
     enemy.draw(sub2,p2_cam)
