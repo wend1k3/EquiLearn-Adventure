@@ -12,6 +12,7 @@ class Enemy(Entity):
         self._loadAnimations()
         self.initHitbox(48,48)
         self.aniSpeed = 5
+        
     def _loadAnimations(self):
         sprite = LoadSave.get_enemy_atlas(LoadSave.Enemy_ATLAS)
         frame_width = sprite.get_width() // 6

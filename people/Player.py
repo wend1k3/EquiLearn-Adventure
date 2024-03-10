@@ -16,13 +16,15 @@ class Player(Entity):
         self.knowledge = 0
         self.overload = False
         self.maxBrain = 40
+        self.aniSpeed=5
         
        
     
 
     def _loadAnimations(self):
-        sprite = LoadSave.get_enable_atlas(LoadSave.IDLE_ATLAS) if self.able else LoadSave.get_disable_atlas(LoadSave.IDLE_ATLAS)
-        frame_width = sprite.get_width() // 4
+        sprite = LoadSave.get_enable_atlas(LoadSave.WALK_ATLAS) if self.able else LoadSave.get_disable_atlas(LoadSave.IDLE_ATLAS)
+        num = 6 if self.able else 4
+        frame_width = sprite.get_width() // num
         frame_height = sprite.get_height()
         
       

@@ -5,7 +5,7 @@ from people.Player import Player
 from Screen.StartScreen import StartScreen
 from Screen.PlayerSelectionScreen import PlayerSelectionScreen as PSS
 
-from people.Enemy import Enemy
+from people.EnemyManager import EnemyManager
 from item.ItemManager import ItemManager
 
 pygame.init()
@@ -21,7 +21,7 @@ canvas = pygame.Surface((screen_width,screen_height))
 start_screen.run()
 player_choices = PS.run()
 
-level = Level('test.png') 
+level = Level('test1.png') 
 player1 = Player(50,2,int(48*1.5),int(34*1.5),level,10,player_choices[0])
 player2 = Player(1000,40,int(48*1.5),int(34*1.5),level,10,player_choices[1])
 level_size = (level.width * level.tile_size, level.height * level.tile_size)
@@ -34,7 +34,9 @@ p2_cam = pygame.Rect(screen_width//2,0,screen_width//2,screen_height)
 sub1 = canvas .subsurface(p1_cam)
 sub2 = canvas .subsurface(p2_cam)
 
-enemy = Enemy(50,100,int(48*1.5),int(48*1.5),level)
+#enemy = Enemy(50,100,int(48*1.5),int(48*1.5),level)
+em = EnemyManager(level)
+em.loadEnemy()
 im = ItemManager()
 level.generate_random_items(8)
 im.loadItems(level.getObject())
@@ -118,14 +120,16 @@ while running:
     
    
     player1.updateAnimationTick()
-    enemy.updateAnimationTick()
+    #enemy.updateAnimationTick()
     player2.updateAnimationTick()
     level.draw(sub1,p1_cam)
     im.drawItem(sub1,p1_cam)
+    em.drawEnemy(sub1,p1_cam)
     player1.draw(sub1,p1_cam)
     player2.draw(sub1,p1_cam)
-    enemy.draw(sub1,p1_cam)
+    #enemy.draw(sub1,p1_cam)
     im.drawItem(sub2,p2_cam)
+    em.drawEnemy(sub2,p2_cam)
     
 
     
@@ -133,7 +137,7 @@ while running:
 
     player2.draw(sub2,p2_cam)
     player1.draw(sub2,p2_cam)
-    enemy.draw(sub2,p2_cam)
+   
   
 
 

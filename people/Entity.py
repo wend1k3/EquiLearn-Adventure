@@ -26,6 +26,7 @@ class Entity:
         self.scale_factor = 1.5
         self.hitbox = None
         self.current_frame_index = 0
+        self.alive = True
         
     def initHitbox(self,width,height):
         self.hitbox = pygame.Rect(self.x,self.y,int(width*self.scale_factor),int(height*self.scale_factor))
@@ -154,7 +155,10 @@ class Entity:
     def getHitbox(self):
         return pygame.Rect(self.x,self.y,self.width,self.height)
     
-    
+    def isAlive(self):
+        return self.alive
+    def setAlive(self):
+        self.alive = False
 
 
 
