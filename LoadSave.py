@@ -9,6 +9,7 @@ class LoadSave:
     IDLE_ATLAS = "idle.png"
     WALK_ATLAS = "walk.png"
     INST_ATLAS = "inst.png"
+    INST2_ATLAS = "inst2.png"
     @staticmethod
     def get_disable_atlas(file_name):
         try:

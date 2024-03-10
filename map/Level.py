@@ -98,18 +98,7 @@ class Level:
 
  
         
-    '''
-    def draw(self, screen):
    
-        for y, row in enumerate(self.lvl_data):
-            for x, tile in enumerate(row):
-                if tile == Pix.GRID:
-                    pygame.draw.rect(screen, (255, 0, 0), (x*self.tile_size, y*self.tile_size, self.tile_size, self.tile_size))
-                if tile == Pix.TRAP:
-                    sprite = LoadSave.get_item_atlas(LoadSave.BOX_ATLAS)
-                    screen.blit(sprite,(x,y))
-                    print(x,y)
-    '''
     def draw(self, screen, camera):
         for y, row in enumerate(self.lvl_data):
             for x, tile in enumerate(row):
@@ -119,8 +108,14 @@ class Level:
                     screen_y = int(y * self.tile_size - camera.y)
                     screen.blit(sprite,(screen_x,screen_y))
                     
-                elif x==4 and y==1:
+                elif x==5 and y==5:
                     sprite = LoadSave.get_inst_atlas(LoadSave.INST_ATLAS)
+                    sprite = pygame.transform.scale(sprite,(sprite.get_width()*2,sprite.get_height()*2))
+                    screen_x = int(x * self.tile_size - camera.x)
+                    screen_y = int(y * self.tile_size - camera.y)
+                    screen.blit(sprite,(screen_x,screen_y))
+                elif x==34 and y==1:
+                    sprite = LoadSave.get_inst_atlas(LoadSave.INST2_ATLAS)
                     sprite = pygame.transform.scale(sprite,(sprite.get_width()*2,sprite.get_height()*2))
                     screen_x = int(x * self.tile_size - camera.x)
                     screen_y = int(y * self.tile_size - camera.y)
