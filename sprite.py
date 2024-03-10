@@ -4,7 +4,7 @@ from map.Level import Level
 from people.Player import Player
 from Screen.StartScreen import StartScreen
 from Screen.PlayerSelectionScreen import PlayerSelectionScreen as PSS
-from item.Box import Box
+
 from people.Enemy import Enemy
 from item.ItemManager import ItemManager
 
@@ -20,9 +20,10 @@ PS = PSS(screen)
 canvas = pygame.Surface((screen_width,screen_height))
 start_screen.run()
 player_choices = PS.run()
+
 level = Level('test.png') 
-player1 = Player(50,2,int(48*1.5),int(34*1.5),level,10)
-player2 = Player(1000,40,int(48*1.5),int(34*1.5),level,10)
+player1 = Player(50,2,int(48*1.5),int(34*1.5),level,10,player_choices[0])
+player2 = Player(1000,40,int(48*1.5),int(34*1.5),level,10,player_choices[1])
 level_size = (level.width * level.tile_size, level.height * level.tile_size)
 space = pygame.Rect(0, 0, *level_size)
 

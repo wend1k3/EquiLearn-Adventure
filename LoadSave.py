@@ -1,12 +1,13 @@
 import pygame
 import os
 class LoadSave:
-    NPC_WHEELCHAIR_ATLAS = "Walk.png"
+ 
     Enemy_ATLAS = "walk.png"
     BOX_ATLAS = "Box3.png"
     BOOK_ATLAS = "book.png"
     TILE_0_ATLAS = "0.png"
     IDLE_ATLAS = "idle.png"
+    WALK_ATLAS = "walk.png"
     @staticmethod
     def get_disable_atlas(file_name):
         try:

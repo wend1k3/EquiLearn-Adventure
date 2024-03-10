@@ -2,10 +2,11 @@ from people.Entity import Entity
 from LoadSave import LoadSave
 import pygame
 class Player(Entity):
-    def __init__(self,x,y,width,height,level,maxSize):
+    def __init__(self,x,y,width,height,level,maxSize,type):
         super().__init__(x,y,width,height,level)
-        self.walkSpeed = 5
-        
+        self.able = type == "enable"
+        self.walkSpeed = 2 if not self.able else 6
+        print(self.walkSpeed)
         self.frames = []
         self.current_frame_index = 0
         self._loadAnimations()
@@ -15,11 +16,12 @@ class Player(Entity):
         self.knowledge = 0
         self.overload = False
         self.maxBrain = 40
+        
        
     
 
     def _loadAnimations(self):
-        sprite = LoadSave.get_sprite_atlas(LoadSave.NPC_WHEELCHAIR_ATLAS)
+        sprite = LoadSave.get_enable_atlas(LoadSave.IDLE_ATLAS) if self.able else LoadSave.get_disable_atlas(LoadSave.IDLE_ATLAS)
         frame_width = sprite.get_width() // 4
         frame_height = sprite.get_height()
         
