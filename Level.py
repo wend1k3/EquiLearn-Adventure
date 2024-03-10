@@ -79,7 +79,7 @@ class Level:
 
  
         
-
+    '''
     def draw(self, screen):
    
         for y, row in enumerate(self.lvl_data):
@@ -90,4 +90,12 @@ class Level:
                     sprite = LoadSave.get_item_atlas(LoadSave.BOX_ATLAS)
                     screen.blit(sprite,(x,y))
                     print(x,y)
-    
+    '''
+    def draw(self, screen, camera):
+        for y, row in enumerate(self.lvl_data):
+            for x, tile in enumerate(row):
+                if tile != Pix.BLANK:  # Assuming 0 represents empty space
+                    screen_x = x * self.tile_size - camera.x
+                    screen_y = y * self.tile_size - camera.y
+                    # Only draw the tile if it's within the camera's viewport
+                    pygame.draw.rect(screen, (255, 255, 255), (screen_x, screen_y, self.tile_size, self.tile_size))

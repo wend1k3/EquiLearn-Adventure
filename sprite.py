@@ -14,11 +14,13 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 start_screen = StartScreen(screen)
 
 start_screen.run()
-level = Level('2.png') 
-player = Player(screen_width / 2 - 40,2,int(48*1.5),int(34*1.5),level)
+level = Level('test.png') 
+player = Player(50,2,int(48*1.5),int(34*1.5),level)
+level_size = (level.width * level.tile_size, level.height * level.tile_size)
+space = pygame.Rect(0, 0, *level_size)
 
-
-
+frame = screen.get_rect()
+camera = frame.copy()
 
 
 
@@ -57,13 +59,16 @@ while running:
 
     
     player.update()
+    camera.center = player.getHitbox().center
+    camera.clamp_ip(space) 
+  
 
    
     screen.fill((0, 0, 0))
    
     player.updateAnimationTick()
-    player.draw(screen)
-    level.draw(screen)
+    player.draw(screen,camera)
+    level.draw(screen,camera)
 
 
  

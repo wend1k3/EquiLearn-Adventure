@@ -13,16 +13,7 @@ class Player(Entity):
         
        
     
-    def draw(self, surface):
-        frame = self.frames[self.aniIndex]
-        if self.flipW == -1:
-            frame = pygame.transform.flip(frame, True, False)
-        
-        surface.blit(frame, (self.x, self.y))
 
-        
-        temp_hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
-        pygame.draw.rect(surface, (255, 0, 0), self.hitbox, 1)
     def _loadAnimations(self):
         sprite = LoadSave.get_sprite_atlas(LoadSave.NPC_WHEELCHAIR_ATLAS)
         frame_width = sprite.get_width() // 4

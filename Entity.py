@@ -47,6 +47,7 @@ class Entity:
         if self.canMove:
             self.move()       
         self.updateHitbox() 
+ 
       
 
     def updateDirection(self):
@@ -125,16 +126,16 @@ class Entity:
   
         surface.blit(frame, (self.x, self.y))
     '''
-    def draw(self, surface):
+    def draw(self, surface,camera):
         frame = self.frames[self.aniIndex]
         if self.flipW == -1:
             frame = pygame.transform.flip(frame, True, False)
         
-        surface.blit(frame, (self.x, self.y))
+        surface.blit(frame, (self.x-camera.x, self.y-camera.y))
 
         # Draw the hitbox around the sprite for visual debugging
         # Create a temporary Rect for drawing purposes since self.x and self.y are used instead of self.hitbox
-        temp_hitbox = pygame.Rect(self.x, self.y, self.width, self.height)
+        temp_hitbox = pygame.Rect(self.x-camera.x, self.y-camera.y, self.width, self.height)
         pygame.draw.rect(surface, (255, 0, 0), temp_hitbox, 1)
 
    
@@ -149,6 +150,8 @@ class Entity:
         self.down = flag
     def setCanMove(self,flag):
         self.canMove = flag
+    def getHitbox(self):
+        return pygame.Rect(self.x,self.y,self.width,self.height)
     
     
 
