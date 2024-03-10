@@ -21,7 +21,7 @@ canvas = pygame.Surface((screen_width,screen_height))
 start_screen.run()
 player_choices = PS.run()
 
-level = Level('test1.png') 
+level = Level('Level.png') 
 player1 = Player(50,2,int(48*1.5),int(34*1.5),level,10,player_choices[0])
 player2 = Player(1000,40,int(48*1.5),int(34*1.5),level,10,player_choices[1])
 level_size = (level.width * level.tile_size, level.height * level.tile_size)
