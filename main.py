@@ -34,7 +34,7 @@ p2_cam = pygame.Rect(screen_width//2,0,screen_width//2,screen_height)
 sub1 = canvas .subsurface(p1_cam)
 sub2 = canvas .subsurface(p2_cam)
 
-#enemy = Enemy(50,100,int(48*1.5),int(48*1.5),level)
+font = pygame.font.Font('fonts/monogram.ttf', 40)
 em = EnemyManager(level)
 em.loadEnemy()
 im = ItemManager()
@@ -43,12 +43,17 @@ im.loadItems(level.getObject())
 running = True
 clock = pygame.time.Clock()
 last_path_update_time = pygame.time.get_ticks()
+last_update_time = pygame.time.get_ticks()
 path_update_interval = 1000
 
 while running:
-    current_time = pygame.time.get_ticks()
     screen.fill((0, 0, 0))
-   
+    current_time = pygame.time.get_ticks()
+    if current_time - last_update_time > 1000:  
+        player1.setTime(-1)
+        player2.setTime(-1)
+        last_update_time = current_time
+    
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -120,7 +125,7 @@ while running:
     
    
     player1.updateAnimationTick()
-    #enemy.updateAnimationTick()
+  
     player2.updateAnimationTick()
     em.updateAnimation()
     level.draw(sub1,p1_cam)
@@ -128,7 +133,7 @@ while running:
     em.drawEnemy(sub1,p1_cam)
     player1.draw(sub1,p1_cam)
     player2.draw(sub1,p1_cam)
-    #enemy.draw(sub1,p1_cam)
+    
     im.drawItem(sub2,p2_cam)
     em.drawEnemy(sub2,p2_cam)
     

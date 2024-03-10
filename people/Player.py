@@ -17,9 +17,19 @@ class Player(Entity):
         self.overload = False
         self.maxBrain = 40
         self.aniSpeed=5
+        self.time = 45
+        self.digit_imgs =  self.digit_images = self.load_digit_images("assets/item/digits/")
         
        
     
+    @staticmethod
+    def load_digit_images(path):
+        digit_images = {}
+        for i in range(10):
+            digit_image = pygame.image.load(f"{path}{i}.png")
+            digit_images[str(i)] = digit_image
+        return digit_images
+
 
     def _loadAnimations(self):
         sprite = LoadSave.get_enable_atlas(LoadSave.WALK_ATLAS) if self.able else LoadSave.get_disable_atlas(LoadSave.IDLE_ATLAS)
@@ -29,7 +39,7 @@ class Player(Entity):
         
       
         for i in range(4):
-            # Define the rectangle area to extract (x, y, width, height)
+            
             rect = pygame.Rect(i * frame_width, 0, frame_width, frame_height)
             frame = sprite.subsurface(rect)
             new_f = pygame.transform.scale(frame,(int(48*1.5),int(34*1.5)))
@@ -46,7 +56,24 @@ class Player(Entity):
     def useItem(self):
         if (not len(self.bag)==0):
             self.bag.pop().setAlive()
-      
+    
+    def setTime(self,num):
+        self.time += num
+    
+    def draw(self,surface,camera):
+        super().draw(surface,camera)
+        time_str = str(self.time)
+        digit_width = self.digit_images['0'].get_width()
+        digit_height = self.digit_images['0'].get_height()
+        total_width = digit_width * len(time_str)
+        
+        
+        start_x = self.x + self.width / 2 - total_width / 2 - camera.x
+        start_y = self.y - digit_height - 10 - camera.y  
+        
+        for i, digit in enumerate(time_str):
+            surface.blit(self.digit_images[digit], (start_x + i * digit_width, start_y))
+
       
 
    
