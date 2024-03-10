@@ -17,7 +17,7 @@ class Player(Entity):
         self.overload = False
         self.maxBrain = 40
         self.aniSpeed=5
-        self.time = 10
+        self.time = 120
         self.digit_imgs =  self.digit_images = self.load_digit_images("assets/item/digits/")
         self.win = False
        
@@ -51,7 +51,7 @@ class Player(Entity):
     def addItem(self,item):
         if (len(self.bag)<self.maxSize):
             self.bag.append(item)
-            print("add item")
+     
       
     def useItem(self):
         if (not len(self.bag)==0):
